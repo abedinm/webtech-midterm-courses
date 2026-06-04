@@ -139,8 +139,19 @@
         document.getElementById("doneBtn").textContent = nowDone ? "✓ Completed" : "Mark complete";
         if (nowDone && current < topics.length - 1) setTimeout(function(){ go(current+1); }, 350);
       };
+      wrapTables();
       wireQuizzes();
       wireRunners();
+    }
+
+    function wrapTables() {
+      [].forEach.call(document.querySelectorAll(".lesson table.t"), function (tbl) {
+        if (tbl.parentNode.classList.contains("table-wrap")) return;
+        var w = document.createElement("div");
+        w.className = "table-wrap";
+        tbl.parentNode.insertBefore(w, tbl);
+        w.appendChild(tbl);
+      });
     }
 
     function quizBlock(q, i) {
